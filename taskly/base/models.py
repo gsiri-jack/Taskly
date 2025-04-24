@@ -1,11 +1,13 @@
 from django.db import models
+from datetime import datetime
 
 # Create your models here.
 
 status_choices = [
     ('pending', 'Pending'),
     ('completed', 'Completed'),
-    ('in_progress', 'In Progress'),]
+    ('in_progress', 'In Progress'),
+]
 
 
 class sample(models.Model):
@@ -13,6 +15,7 @@ class sample(models.Model):
     description = models.TextField()
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
+    due_date = models.DateTimeField(default=datetime.now)  # Pass callable here
     status = models.CharField(
         max_length=20, choices=status_choices, default='in_progress')
 

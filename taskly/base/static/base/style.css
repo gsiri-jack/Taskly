@@ -1,0 +1,13 @@
+.body{
+    border: 2px dashed darkblue;
+    display: flex;
+}
+
+.menuCont{
+    width: 13vw;
+    max-width: 400px;
+    color:blueviolet;
+    border: 1px solid peachpuff;
+    height: 100vh;
+
+}

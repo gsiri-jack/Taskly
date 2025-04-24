@@ -6,12 +6,23 @@
 .menuCont{
     width: 13vw;
     max-width: 400px;
-    color:blueviolet;
+ 
     border: 1px solid peachpuff;
     height: 100vh;
 
 }
+.menuCont a{
+    color : black;
+}
 #navbarNav{
     display: flex;
     flex-direction: column;
+}
+
+.nav-link{
+    color : black !important;
+}
+
+.nav-link:active{
+    color : black !important;
 }

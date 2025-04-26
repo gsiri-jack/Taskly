@@ -7,7 +7,8 @@
     width: 13vw;
     max-width: 400px;
  
-    border: 1px solid peachpuff;
+    background-color: antiquewhite;
+
     height: 100vh;
 
 }
@@ -19,10 +20,18 @@
     flex-direction: column;
 }
 
-.nav-link{
+.nav-item .nav-link{
     color : black !important;
+    font-size: 15;
+    
 }
 
-.nav-link:active{
+.sidebar .nav-link:active{
     color : black !important;
+}
+.sidebar .container-fluid{
+    align-items: flex-start;
+    padding: 2px;
+  
+
 }

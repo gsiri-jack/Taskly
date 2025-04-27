@@ -46,3 +46,15 @@
 .topMenu a{ padding: 10px;}
 
 .topMenu a i{font-size: 20px;}
+
+
+/* Index file */
+.tsci{
+    width: 95%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.taskCard{ display: flex;
+    align-items: center;}
+.tsci a{padding: 0px 6px;}

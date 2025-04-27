@@ -34,6 +34,10 @@
     padding: 2px;
 }
 
+.content{
+    width: 86vw;
+}
+
 .topMenu{
     border: 1px solid red;
 }

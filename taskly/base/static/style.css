@@ -39,5 +39,10 @@
 }
 
 .topMenu{
-    border: 1px solid red;
+    display: flex;
+    justify-content: flex-end;
 }
+
+.topMenu a{ padding: 10px;}
+
+.topMenu a i{font-size: 20px;}

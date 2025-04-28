@@ -35,9 +35,8 @@ class task(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_on = models.DateTimeField(default=datetime.now)
-    due_date = models.DateField()
+    due_date = models.DateField(default=datetime.now)
     priority = models.CharField(
-        choices=priority_choices, default='normal'
-    ),
+        max_length=20, choices=priority_choices, default='normal')
     status = models.CharField(
-        max_length=20, choices=status_choices, default='in_progress'),
+        max_length=20, choices=status_choices, default='in_progress')

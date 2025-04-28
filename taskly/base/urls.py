@@ -6,5 +6,5 @@ urlpatterns = [
     path('', views.index, name='index'),
     path('login/', views.user_login, name='login'),
     path('tsk/<int:id>', views.task_detail, name='task_detail'),
-    path('addTsk/', views.create_task, name='create_task'),
+    path('create_task', views.create_task, name='create_task'),
 ]

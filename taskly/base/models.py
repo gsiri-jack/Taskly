@@ -1,5 +1,6 @@
 from django.db import models
 from datetime import datetime
+from django.contrib.auth.models import User
 
 # Create your models here.
 
@@ -7,6 +8,11 @@ status_choices = [
     ('pending', 'Pending'),
     ('completed', 'Completed'),
     ('in_progress', 'In Progress'),
+]
+priority_choices = [
+    ('normal', 'Normal'),
+    ('medium', 'medium'),
+    ('high', 'high'),
 ]
 
 
@@ -21,3 +27,17 @@ class sample(models.Model):
 
     def __str__(self):
         return self.title
+
+
+class task(models.Model):
+    title = models.CharField(max_length=255)
+    description = models.TextField()
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_on = models.DateTimeField(default=datetime.now)
+    due_date = models.DateField()
+    priority = models.CharField(
+        choices=priority_choices, default='normal'
+    ),
+    status = models.CharField(
+        max_length=20, choices=status_choices, default='in_progress'),

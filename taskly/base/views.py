@@ -44,6 +44,6 @@ def task_detail(request, id):
     return render(request, 'base/task_detail.html', {'task': task, 'username': username})
 
 
-def create_task(request, id):
+def create_task(request):
     print('Jack')
-    return HttpResponse("jack")
+    return redirect('index')

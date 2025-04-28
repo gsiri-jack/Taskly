@@ -42,3 +42,7 @@ def task_detail(request, id):
     print(username)
 
     return render(request, 'base/task_detail.html', {'task': task, 'username': username})
+
+
+def create_task(request, id):
+    return HttpResponse("jack")

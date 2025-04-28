@@ -58,3 +58,7 @@
 .taskCard{ display: flex;
     align-items: center;}
 .tsci a{padding: 0px 6px;}
+.link_btn{
+    text-decoration: none;
+    color: peru;
+}

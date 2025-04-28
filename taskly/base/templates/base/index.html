@@ -28,5 +28,6 @@
             </div>
             <hr>
         {% endfor %}
+        + <a href="{% url 'task_detail' task.id %}">Add Task</a>
     </div>
 {% endblock %}

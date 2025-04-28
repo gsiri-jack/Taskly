@@ -1,9 +1,9 @@
 from django.db import models
 from rest_framework import serializers
-from .models import sample
+from .models import sample, task
 
 
 class SampleSerializer(serializers.ModelSerializer):
     class Meta:
-        model = sample
+        model = task
         fields = '__all__'

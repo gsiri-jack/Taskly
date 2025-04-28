@@ -1,19 +1,20 @@
 from django.shortcuts import render, redirect
 from django.urls import reverse_lazy, reverse
 from django.http import HttpResponse
-from .models import sample
+from .models import sample, task
 from .serializers import SampleSerializer
-from .forms import LoginForm
+from .forms import LoginForm, task_creation_form
 from django.contrib.auth import authenticate, login, logout
 
 # Create your views here.
 
 
 def index(request):
-    data = sample.objects.all()
+    data = task.objects.all()
     serialize = SampleSerializer(data, many=True)
     username = request.session.get('username')
-    return render(request, 'base/index.html', {'title': 'Dashboard', 'tasks': serialize.data, 'username': username})
+    task_create = task_creation_form()
+    return render(request, 'base/index.html', {'title': 'Dashboard', 'tasks': serialize.data, 'username': username, "task_create": task_create})
 
 
 def user_login(request):
@@ -37,13 +38,16 @@ def user_login(request):
 
 
 def task_detail(request, id):
-    task = sample.objects.get(id=id)
+    task_data = task.objects.get(id=id)
     username = request.session.get('username')
     print(username)
 
-    return render(request, 'base/task_detail.html', {'task': task, 'username': username})
+    return render(request, 'base/task_detail.html', {'task': task_data, 'username': username})
 
 
 def create_task(request):
-    print('Jack')
-    return redirect('index')
+    if request.method == 'POST':
+        form = task_creation_form(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('index')

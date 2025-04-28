@@ -45,4 +45,5 @@ def task_detail(request, id):
 
 
 def create_task(request, id):
+    print('Jack')
     return HttpResponse("jack")

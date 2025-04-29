@@ -51,3 +51,9 @@ def create_task(request):
         if form.is_valid():
             form.save()
             return redirect('index')
+
+
+def delete_task(request, id):
+    product = task.objects.get(id=id)
+    product.delete()
+    return redirect('index')

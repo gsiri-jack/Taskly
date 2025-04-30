@@ -74,3 +74,9 @@ def update_task(request, id):
     else:
         form = task_creation_form(instance=task_ins)
     return render(request, 'base/update_task.html', {'form': form, 'task': task_ins})
+
+def create_label(request):
+    pass
+
+def add_label(request, id):
+    pass

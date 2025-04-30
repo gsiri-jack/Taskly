@@ -8,5 +8,7 @@ urlpatterns = [
     path('tsk/<int:id>', views.task_detail, name='task_detail'),
     path('create_task', views.create_task, name='create_task'),
     path('delete_task/<int:id>/', views.delete_task, name='delete_task'),
-    path('update-task/<int:id>/', views.update_task, name='update-task')
+    path('update-task/<int:id>/', views.update_task, name='update-task'),
+    path('create-label/', views.update_task, name='update-task'),
+    
 ]

@@ -1,7 +1,32 @@
 {% extends 'base/base.html' %}
 
-
 {% block dashboard %}
+<script>
+  function openUpdateModal(taskId) {
+    fetch(`update-task/${taskId}/`)
+      .then(response => response.text())
+      .then(html => {
+        document.getElementById("modalContent").innerHTML = html;
+        new bootstrap.Modal(document.getElementById("updateTaskModal")).show();
+      });
+  }
+  
+  function submitUpdateForm(event, form) {
+    event.preventDefault();
+    const formData = new FormData(form);
+  
+    fetch(form.action, {
+      method: 'POST',
+      body: formData
+    })
+    .then(res => res.json())
+    .then(data => {
+      if (data.success) {
+        location.reload();
+      }
+    });
+  }
+  </script>
     <div class="container mt-5">
         <h2 class="">Hi {{username}}..! </h2>
         <p class="">Your task management solution.</p>
@@ -27,6 +52,8 @@
                    <div>
                     <a href="{% url 'task_detail' task.id %}" ><i class="bi bi-pencil-square"></i></a>
                     <a href="{% url 'delete_task' task.id %}" > <i class="bi bi-trash3"></i></a>
+                    <a href="#" onclick="openUpdateModal({{task.id}})">Update</a>
+
                    
                    </div>
                 </div>
@@ -43,19 +70,22 @@
   <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog">
       <div class="modal-content">
-        <div class="modal-header">
-          <h1 class="modal-title fs-5" id="exampleModalLabel">Modal title</h1>
-          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-        </div>
-        <form action="create_task" method="POST">
-            {% csrf_token %}
-          {{task_create.as_p}}
-            <button type="submit">Create</button>
-<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-
-        </form>
+        {% include 'base/create_task_form.html' %}
       </div>
     </div>
   </div>
     </div>
+
+    <!-- update_modal -->
+    
+      
+    <!-- Modal placeholder -->
+<div class="modal fade" id="updateTaskModal" tabindex="-1" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content" id="modalContent">
+      <!-- form will load here -->
+    </div>
+  </div>
+</div>
+
 {% endblock %}

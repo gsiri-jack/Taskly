@@ -40,3 +40,14 @@ class task(models.Model):
         max_length=20, choices=priority_choices, default='normal')
     status = models.CharField(
         max_length=20, choices=status_choices, default='in_progress')
+
+
+class tag(models.Model):
+    tag_name = models.CharField(max_length=50, default='genral')
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    created_at = models.DateField(datetime.now)
+
+
+class task_tag_link(models.Model):
+    task_id = models.ForeignKey(task, on_delete=models.CASCADE)
+    tag_id = models.ForeignKey(tag, on_delete=models.CASCADE)

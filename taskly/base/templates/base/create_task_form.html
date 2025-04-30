@@ -1,0 +1,21 @@
+{% load static %} 
+{% load bootstrap5 %} 
+{% bootstrap_css %} 
+{% bootstrap_javascript %}
+
+
+{% block create_task_modal %}
+
+<div class="modal-header">
+    <h1 class="modal-title fs-5" id="exampleModalLabel">Modal title</h1>
+    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+  </div>
+  <form action="create_task" method="POST">
+      {% csrf_token %}
+    {{task_create.as_p}}
+      <button type="submit">Create</button>
+      <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+
+  </form>
+
+{% endblock %}

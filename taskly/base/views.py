@@ -1,3 +1,5 @@
+from django.http import JsonResponse
+from django.shortcuts import render, get_object_or_404
 from django.shortcuts import render, redirect
 from django.urls import reverse_lazy, reverse
 from django.http import HttpResponse
@@ -57,3 +59,18 @@ def delete_task(request, id):
     product = task.objects.get(id=id)
     product.delete()
     return redirect('index')
+
+# views.py
+
+
+def update_task(request, id):
+    task_ins = get_object_or_404(task, id=id)
+
+    if request.method == 'POST':
+        form = task_creation_form(request.POST, instance=task_ins)
+        if form.is_valid():
+            form.save()
+            return JsonResponse({'success': True})
+    else:
+        form = task_creation_form(instance=task_ins)
+    return render(request, 'base/update_task.html', {'form': form, 'task': task_ins})

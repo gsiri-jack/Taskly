@@ -1,8 +1,8 @@
 from django.contrib import admin
-from .models import sample, task, tag, task_tag_link
+from .models import sample,  task, tag, task_tag_link
 
 # Register your models here.
-models_list = [sample, task, tag, task_tag_link]
+models_list = [sample,  tag, task_tag_link]
 for i in models_list:
     pass
 admin.site.register(task)

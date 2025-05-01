@@ -3,7 +3,7 @@ from django.shortcuts import render, get_object_or_404
 from django.shortcuts import render, redirect
 from django.urls import reverse_lazy, reverse
 from django.http import HttpResponse
-from .models import sample, task
+from .models import sample,  tag, task
 from .serializers import SampleSerializer
 from .forms import LoginForm, task_creation_form
 from django.contrib.auth import authenticate, login, logout
@@ -13,6 +13,7 @@ from django.contrib.auth import authenticate, login, logout
 
 def index(request):
     data = task.objects.all()
+    # data = sample.objects.all()
     serialize = SampleSerializer(data, many=True)
     username = request.session.get('username')
     task_create = task_creation_form()
@@ -41,6 +42,7 @@ def user_login(request):
 
 def task_detail(request, id):
     task_data = task.objects.get(id=id)
+    # task_data = sample.objects.all(id=id)
     username = request.session.get('username')
     print(username)
 
@@ -57,6 +59,7 @@ def create_task(request):
 
 def delete_task(request, id):
     product = task.objects.get(id=id)
+    # product = sample.objects.get(id=id)
     product.delete()
     return redirect('index')
 
@@ -65,7 +68,7 @@ def delete_task(request, id):
 
 def update_task(request, id):
     task_ins = get_object_or_404(task, id=id)
-
+    # task_ins = get_object_or_404(sample, id=id)
     if request.method == 'POST':
         form = task_creation_form(request.POST, instance=task_ins)
         if form.is_valid():
@@ -75,8 +78,11 @@ def update_task(request, id):
         form = task_creation_form(instance=task_ins)
     return render(request, 'base/update_task.html', {'form': form, 'task': task_ins})
 
+
 def create_label(request):
     pass
 
-def add_label(request, id):
-    pass
+
+def add_label(request):
+    tags = tag.objects.all()
+    return render(request, 'base/add_tag.html', {'labels': tags})

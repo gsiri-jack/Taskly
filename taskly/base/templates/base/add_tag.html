@@ -1,0 +1,8 @@
+{% load static %} 
+{% load bootstrap5 %} 
+{% bootstrap_css %} 
+{% bootstrap_javascript %}
+
+{% for label in labels %}
+<a href="" class="btn btn-primary">{{ label.tag_name }}</a><br>
+{% endfor %}

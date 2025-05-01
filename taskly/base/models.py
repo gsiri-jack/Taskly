@@ -29,6 +29,12 @@ class sample(models.Model):
         return self.title
 
 
+class tag(models.Model):
+    tag_name = models.CharField(max_length=50, default='genral')
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    created_at = models.DateField(default=datetime.now)
+
+
 class task(models.Model):
     title = models.CharField(max_length=255)
     description = models.TextField()
@@ -40,12 +46,7 @@ class task(models.Model):
         max_length=20, choices=priority_choices, default='normal')
     status = models.CharField(
         max_length=20, choices=status_choices, default='in_progress')
-
-
-class tag(models.Model):
-    tag_name = models.CharField(max_length=50, default='genral')
-    user = models.ForeignKey(User, on_delete=models.CASCADE)
-    created_at = models.DateField(default=datetime.now)
+    tags = models.ManyToManyField(tag)
 
 
 class task_tag_link(models.Model):

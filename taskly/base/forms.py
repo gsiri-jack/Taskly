@@ -1,6 +1,6 @@
 from django import forms
 from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
-from .models import task
+from .models import sample, task
 
 
 class LoginForm(AuthenticationForm):

@@ -10,5 +10,6 @@ urlpatterns = [
     path('delete_task/<int:id>/', views.delete_task, name='delete_task'),
     path('update-task/<int:id>/', views.update_task, name='update-task'),
     path('create-label/', views.update_task, name='update-task'),
-    
+    path('add-label/', views.add_label, name='add-label'),
+
 ]

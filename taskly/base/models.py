@@ -45,7 +45,7 @@ class task(models.Model):
 class tag(models.Model):
     tag_name = models.CharField(max_length=50, default='genral')
     user = models.ForeignKey(User, on_delete=models.CASCADE)
-    created_at = models.DateField(datetime.now)
+    created_at = models.DateField(default=datetime.now)
 
 
 class task_tag_link(models.Model):

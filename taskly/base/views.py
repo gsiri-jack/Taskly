@@ -13,11 +13,12 @@ from django.contrib.auth import authenticate, login, logout
 
 def index(request):
     data = task.objects.all()
+    tag_data = tag.objects.all()
     # data = sample.objects.all()
     serialize = SampleSerializer(data, many=True)
     username = request.session.get('username')
     task_create = task_creation_form()
-    return render(request, 'base/index.html', {'title': 'Dashboard', 'tasks': serialize.data, 'username': username, "task_create": task_create})
+    return render(request, 'base/index.html', {'title': 'Dashboard', 'tasks': serialize.data, 'username': username, "task_create": task_create, 'tags': tag_data})
 
 
 def user_login(request):
@@ -52,9 +53,17 @@ def task_detail(request, id):
 def create_task(request):
     if request.method == 'POST':
         form = task_creation_form(request.POST)
-        if form.is_valid():
-            form.save()
-            return redirect('index')
+
+        title = request.POST['task_title']
+        desc = request.POST['task_description']
+        due_date = request.POST['due_date']
+        task_tag = request.POST['task_tag']
+        task_priority = request.POST['task_priority']
+        task.objects.create(
+            title=title, description=desc, user=request.user, due_date=due_date, priority=task_priority)
+        task.tags.add(task_tag)
+        print('jack')
+        return redirect('index')
 
 
 def delete_task(request, id):

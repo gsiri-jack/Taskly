@@ -7,44 +7,32 @@
 {% block create_task_modal %}
 
 <div class="modal-header">
-    <h1 class="modal-title fs-5" id="exampleModalLabel">Modal title</h1>
-    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+
   </div>
   <form action="create_task" method="POST">
       {% csrf_token %}
-    {{task_create.as_p}}
+      <input type="text" name="task_title" id="" class="form-input input_style" placeholder="title">
+      <input type="text" name="task_description" id="" class="form-input input_style" placeholder="description">
+     
+      <input type="date" name="due_date" id="" class="form-input input_style" placeholder="due_date">
+      <select class="form-select" aria-label="Default select example" name="task_priority">
+        <option selected>Priority</option>
+        <option value="1">high</option>
+        <option value="2">medium</option>
+        <option value="3">Low</option>
+      </select>
+
+     <select class="form-select" aria-label="Default select example" name="task_tag">
+      <option selected>Tags</option>
+       {% for label in tags %}
+       <option>{{label.tag_name}}</option>
+       {% endfor %}
+      </select>
+      
+      
+
       <button type="submit">Create</button>
       <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
   </form>
-  <a class="btn btn-primary" data-bs-toggle="offcanvas" href="" role="button" aria-controls="offcanvasExample">
-    <i class="bi bi-plus-circle"></i> Add Label
-  </a>
-  <a >
-    Link with href
-  </a>
-  <button class="btn btn-primary" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasExample" aria-controls="offcanvasExample">
-    Button with data-bs-target
-  </button>
   
-  <div class="offcanvas offcanvas-start" tabindex="-1" id="offcanvasExample" aria-labelledby="offcanvasExampleLabel">
-    <div class="offcanvas-header">
-      <h5 class="offcanvas-title" id="offcanvasExampleLabel">Offcanvas</h5>
-      <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
-    </div>
-    <div class="offcanvas-body">
-      <div>
-        Some text as placeholder. In real life you can have the elements you have chosen. Like, text, images, lists, etc.
-      </div>
-      <div class="dropdown mt-3">
-        <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown">
-          Dropdown button
-        </button>
-        <ul class="dropdown-menu">
-          <li><a class="dropdown-item" href="#">Action</a></li>
-          <li><a class="dropdown-item" href="#">Another action</a></li>
-          <li><a class="dropdown-item" href="#">Something else here</a></li>
-        </ul>
-      </div>
-    </div>
-  </div>
 {% endblock %}

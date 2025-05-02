@@ -43,10 +43,10 @@ class task(models.Model):
     updated_on = models.DateTimeField(default=datetime.now)
     due_date = models.DateField(default=datetime.now)
     priority = models.CharField(
-        max_length=20, choices=priority_choices, default='normal')
+        max_length=20, default='normal')
     status = models.CharField(
         max_length=20, choices=status_choices, default='in_progress')
-    tags = models.ManyToManyField(tag, null=True)
+    tags = models.ManyToManyField(tag, null=True, default='')
 
 
 class task_tag_link(models.Model):

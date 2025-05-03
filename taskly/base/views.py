@@ -3,7 +3,7 @@ from django.shortcuts import render, get_object_or_404
 from django.shortcuts import render, redirect
 from django.urls import reverse_lazy, reverse
 from django.http import HttpResponse
-from .models import sample,  tag, task
+from .models import sample,  tag, task, task_tag_link
 from .serializers import SampleSerializer
 from .forms import LoginForm, task_creation_form
 from django.contrib.auth import authenticate, login, logout
@@ -14,10 +14,12 @@ from django.contrib.auth import authenticate, login, logout
 def index(request):
     data = task.objects.all()
     tag_data = tag.objects.all()
+
     # data = sample.objects.all()
     serialize = SampleSerializer(data, many=True)
     username = request.session.get('username')
     task_create = task_creation_form()
+    print(serialize.data[0])
     return render(request, 'base/index.html', {'title': 'Dashboard', 'tasks': serialize.data, 'username': username, "task_create": task_create, 'tags': tag_data})
 
 
@@ -59,9 +61,12 @@ def create_task(request):
         due_date = request.POST['due_date']
         task_tag = request.POST['task_tag']
         task_priority = request.POST['task_priority']
-        task.objects.create(
+        new_task = task.objects.create(
             title=title, description=desc, user=request.user, due_date=due_date, priority=task_priority)
-        task.tags.add(task_tag)
+        tag_instance = tag.objects.get(
+            tag_name=task_tag)
+        # print(tag_instance['tag_name'])
+        new_task.tags.add(tag_instance)
         print('jack')
         return redirect('index')
 
@@ -72,6 +77,13 @@ def delete_task(request, id):
     product.delete()
     return redirect('index')
 
+
+def get_task_tags(request, id):
+    task_instance = get_object_or_404(task, id=id)
+    tags = task_instance.tags.all()
+    tag_list = [tag.tag_name for tag in tags]
+    print(tag_list)
+    return JsonResponse({'tags': tag_list})
 # views.py
 
 

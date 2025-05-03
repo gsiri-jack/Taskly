@@ -14,13 +14,9 @@ from django.contrib.auth import authenticate, login, logout
 def index(request):
     data = task.objects.all()
     tag_data = tag.objects.all()
-
-    # data = sample.objects.all()
-    serialize = SampleSerializer(data, many=True)
     username = request.session.get('username')
     task_create = task_creation_form()
-    print(serialize.data[0])
-    return render(request, 'base/index.html', {'title': 'Dashboard', 'tasks': serialize.data, 'username': username, "task_create": task_create, 'tags': tag_data})
+    return render(request, 'base/index.html', {'title': 'Dashboard', 'tasks': data, 'username': username, "task_create": task_create, 'tags': tag_data})
 
 
 def user_login(request):

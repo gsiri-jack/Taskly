@@ -1,38 +1,63 @@
-{% load static %} 
-{% load bootstrap5 %} 
-{% bootstrap_css %} 
+{% load static %}
+{% load bootstrap5 %}
+{% bootstrap_css %}
 {% bootstrap_javascript %}
 
-
 {% block create_task_modal %}
+<div class="modal fade" id="createTaskModal" tabindex="-1" aria-labelledby="createTaskModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content rounded-4 shadow-sm">
+      <div class="modal-header bg-primary text-white">
+        <h5 class="modal-title" id="createTaskModalLabel">Create New Task</h5>
+        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      
+      <form action="{% url 'create_task' %}" method="POST">
+        {% csrf_token %}
+        <div class="modal-body px-4 py-3">
 
-<div class="modal-header">
+          <div class="mb-3">
+            <label for="task_title" class="form-label">Title</label>
+            <input type="text" class="form-control" name="task_title" id="task_title" placeholder="Enter task title" required>
+          </div>
 
+          <div class="mb-3">
+            <label for="task_description" class="form-label">Description</label>
+            <textarea class="form-control" name="task_description" id="task_description" rows="3" placeholder="Enter task description"></textarea>
+          </div>
+
+          <div class="mb-3">
+            <label for="due_date" class="form-label">Due Date</label>
+            <input type="date" class="form-control" name="due_date" id="due_date" required>
+          </div>
+
+          <div class="mb-3">
+            <label for="task_priority" class="form-label">Priority</label>
+            <select class="form-select" name="task_priority" id="task_priority" required>
+              <option value="" disabled selected>Select priority</option>
+              <option value="1">High</option>
+              <option value="2">Medium</option>
+              <option value="3">Low</option>
+            </select>
+          </div>
+
+          <div class="mb-3">
+            <label for="task_tag" class="form-label">Tags</label>
+            <select class="form-select" name="task_tag" id="task_tag" required>
+              <option value="" disabled selected>Select tag</option>
+              {% for label in tags %}
+                <option value="{{ label.id }}">{{ label.tag_name }}</option>
+              {% endfor %}
+            </select>
+          </div>
+        </div>
+
+        <div class="modal-footer px-4 py-3">
+          <button type="submit" class="btn btn-success">Create Task</button>
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+        </div>
+      </form>
+    </div>
   </div>
-  <form action="create_task" method="POST">
-      {% csrf_token %}
-      <input type="text" name="task_title" id="" class="form-input input_style" placeholder="title">
-      <input type="text" name="task_description" id="" class="form-input input_style" placeholder="description">
-     
-      <input type="date" name="due_date" id="" class="form-input input_style" placeholder="due_date">
-      <select class="form-select" aria-label="Default select example" name="task_priority">
-        <option selected>Priority</option>
-        <option value="1">high</option>
-        <option value="2">medium</option>
-        <option value="3">Low</option>
-      </select>
-
-     <select class="form-select" aria-label="Default select example" name="task_tag">
-      <option selected>Tags</option>
-       {% for label in tags %}
-       <option>{{label.tag_name}}</option>
-       {% endfor %}
-      </select>
-      
-      
-
-      <button type="submit">Create</button>
-      <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-  </form>
-  
+</div>
 {% endblock %}

@@ -72,20 +72,15 @@
             </div>
             <hr>
         {% endfor %}
-     <!-- Button trigger modal -->
-<a href="" class='link_btn' data-bs-toggle="modal" data-bs-target="#exampleModal">
+    
+<a href="" class='link_btn' data-bs-toggle="modal" data-bs-target="#createTaskModal">
     <i class="bi bi-plus-circle"></i> Add Task
   </a>
   <div style="height: 10vh;">&nbsp;</div>
   
-  <!-- Modal -->
-  <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
-      <div class="modal-content">
-        {% include 'base/create_task_form.html' %}
-      </div>
-    </div>
-  </div>
+ 
+  {% include 'base/create_task_form.html' %}
+
     </div>
 
     <!-- update_modal -->

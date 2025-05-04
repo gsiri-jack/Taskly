@@ -119,6 +119,7 @@ def toggle_task(request):
         task_ins = task.objects.get(id=task_id)
         task_ins.completed = not task_ins.completed
         task_ins.save()
+        print("TASK", task_ins.completed)
         return JsonResponse({'success': True, 'completed': task_ins.completed})
     return JsonResponse({'success': False}, status=400)
 

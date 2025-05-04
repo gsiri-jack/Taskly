@@ -39,10 +39,16 @@
     .then(response => response.json())
     .then(data => {
       const textElement = document.getElementById(`task-text-${taskId}`);
-      if (data.status === 'completed') {
-        textElement.style.textDecoration = 'line-through';
+      if (data.completed) {
+        textElement.classList.add('completed');
+        console.log(textElement.classList)
+
       } else {
-        textElement.style.textDecoration = 'none';
+        textElement.classList.remove('completed');
+        console.log(textElement.classList)
+
+
+        
       }
     });
   }

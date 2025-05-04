@@ -24,6 +24,7 @@ class sample(models.Model):
     due_date = models.DateTimeField(default=datetime.now)  # Pass callable here
     status = models.CharField(
         max_length=20, choices=status_choices, default='in_progress')
+    completed = models.BooleanField(default=0)
 
     def __str__(self):
         return self.title

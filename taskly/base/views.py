@@ -124,10 +124,11 @@ def toggle_task(request):
     return JsonResponse({'success': False}, status=400)
 
 
-def create_label(request):
-    pass
+def create_task_form(request):
+    tags = tag.objects.all()
+    return render(request, 'base/create_task_form.html', {'tags': tags})
 
 
 def add_label(request):
     tags = tag.objects.all()
-    return render(request, 'base/add_tag.html', {'labels': tags})
+    return render(request, 'base/add_tag.html', {'tags': tags})

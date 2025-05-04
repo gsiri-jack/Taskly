@@ -1,8 +1,7 @@
 {% extends 'base/base.html' %}
 
 {% block dashboard %}
-<script>
-  </script>
+
     <div class="container mt-5">
         <h2 class="">Hi {{username}}..! </h2>
         <p class="">Your task management solution.</p>
@@ -10,17 +9,13 @@
         {% for task in tasks %}
         
             <div class="taskCard mb-3">
-                <input type="checkbox" class="form-check-input" name="status" id="">
+                <input type="checkbox" class="form-check-input" {% if task.completed %}checked{% endif %}
+                onchange="toggleTask('{{ task.id }}', this)">
                 <div class="tsci">
                     <div class="">
                    
-                      <h5 class="card-title">
-                        {{ task.title }} 
-                        {% if task.completed %}
-                          <span class="badge bg-success ms-2">Completed</span>
-                        {% else %}
-                          <i class="bi bi-flag-fill text-danger ms-2"></i>
-                        {% endif %}
+                      <h5 id="task-text-{{ task.id }}" class="{% if task.completed %}completed{% endif %}">
+                          {{ task.title }}
                       </h5>
                       
                       <p class="card-text">{{ task.description }}</p>
@@ -54,18 +49,15 @@
   </a>
   <div style="height: 10vh;">&nbsp;</div>
   
-  <ul>
+  <!-- <ul>
     {% for task in tasks %}
   <div>
-    <input type="checkbox" {% if task.completed %}checked{% endif %}
-           onchange="toggleTask('{{ task.id }}', this)">
-    <span id="task-text-{{ task.id }}" class="{% if task.completed %}completed{% endif %}">
-      {{ task.title }}
-    </span>
+    <input type="checkbox" >
+    
   </div>
 {% endfor %}
   </ul>
-  
+   -->
  
   
     </div>

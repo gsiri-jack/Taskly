@@ -45,7 +45,7 @@
 
       } else {
         textElement.classList.remove('completed');
-        console.log(textElement.classList)
+        console.log("no",textElement.classList)
 
 
         
@@ -121,9 +121,9 @@
   <ul>
     {% for task in tasks %}
   <div>
-    <input type="checkbox" {% if task.status == 'completed' %}checked{% endif %}
+    <input type="checkbox" {% if task.completed %}checked{% endif %}
            onchange="toggleTask('{{ task.id }}', this)">
-    <span id="task-text-{{ task.id }}" class="{% if task.status == 'completed' %}completed{% endif %}">
+    <span id="task-text-{{ task.id }}" class="{% if task.completed %}completed{% endif %}">
       {{ task.title }}
     </span>
   </div>

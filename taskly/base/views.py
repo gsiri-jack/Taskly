@@ -117,9 +117,9 @@ def toggle_task(request):
     if request.method == 'POST':
         task_id = request.POST.get('task_id')
         task_ins = task.objects.get(id=task_id)
-        task_ins.status = 'completed' if task_ins.status == 'pending' else 'pending'
+        task_ins.completed = not task_ins.completed
         task_ins.save()
-        return JsonResponse({'success': True, 'completed': task_ins.status})
+        return JsonResponse({'success': True, 'completed': task_ins.completed})
     return JsonResponse({'success': False}, status=400)
 
 

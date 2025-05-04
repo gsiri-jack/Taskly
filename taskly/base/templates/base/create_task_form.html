@@ -40,7 +40,7 @@
             <select class="form-select" name="task_tag" id="task_tag" required>
               <option value="" disabled selected>Select tag</option>
               {% for label in tags %}
-                <option value="{{ label.id }}">{{ label.tag_name }}</option>
+                <option>{{ label.tag_name }}</option>
               {% endfor %}
             </select>
           </div>

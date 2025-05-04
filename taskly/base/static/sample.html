@@ -1,0 +1,52 @@
+{% load static %} {% load bootstrap5 %} {% bootstrap_css %} {%
+bootstrap_javascript %} {% block create_task_modal %}
+<div class="modal-header"></div>
+<form action="create_task" method="POST">
+  {% csrf_token %}
+  <input
+    type="text"
+    name="task_title"
+    id=""
+    class="form-input input_style"
+    placeholder="title"
+  />
+  <input
+    type="text"
+    name="task_description"
+    id=""
+    class="form-input input_style"
+    placeholder="description"
+  />
+  <input
+    type="date"
+    name="due_date"
+    id=""
+    class="form-input input_style"
+    placeholder="due_date"
+  />
+  <select
+    class="form-select"
+    aria-label="Default select example"
+    name="task_priority"
+  >
+    <option selected>Priority</option>
+    <option value="1">high</option>
+    <option value="2">medium</option>
+    <option value="3">Low</option>
+  </select>
+  <select
+    class="form-select"
+    aria-label="Default select example"
+    name="task_tag"
+  >
+    <option selected>Tags</option>
+    {% for label in tags %}
+    <option>{{label.tag_name}}</option>
+    {% endfor %}
+  </select>
+  <button type="submit">Create</button>
+  <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+    Close
+  </button>
+</form>
+{% endblock %}

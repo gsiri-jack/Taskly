@@ -55,15 +55,30 @@ def create_task(request):
         title = request.POST['task_title']
         desc = request.POST['task_description']
         due_date = request.POST['due_date']
-        task_tag = request.POST['task_tag']
+        task_tag = request.POST['task_tag']  # Assuming this is the tag name
         task_priority = request.POST['task_priority']
+
+        # Create the task instance
         new_task = task.objects.create(
-            title=title, description=desc, user=request.user, due_date=due_date, priority=task_priority)
-        tag_instance = tag.objects.get(
-            tag_name=task_tag)
-        # print(tag_instance['tag_name'])
+            title=title,
+            description=desc,
+            user=request.user,
+            due_date=due_date,
+            priority=task_priority
+        )
+
+        # Handle the tag
+        try:
+            tag_instance = tag.objects.get(tag_name=task_tag)
+        except tag.DoesNotExist:
+            # Option 1: Create a new tag if it doesn't exist
+            tag_instance = tag.objects.create(
+                tag_name=task_tag, user=request.user)
+
+        # Add the tag to the task instance
         new_task.tags.add(tag_instance)
-        print('jack')
+
+        print('Task created successfully')
         return redirect('index')
 
 

@@ -7,6 +7,7 @@ from .models import sample,  tag, task, task_tag_link
 from .serializers import SampleSerializer
 from .forms import LoginForm, task_creation_form
 from django.contrib.auth import authenticate, login, logout
+from django.views.decorators.csrf import csrf_exempt
 
 # Create your views here.
 
@@ -111,11 +112,15 @@ def update_task(request, id):
     return render(request, 'base/update_task.html', {'form': form, 'task': task_ins})
 
 
-def toggle_task(request, task_id):
-    task = task.objects.get(id=task_id)
-    task.completed = not task.completed
-    task.save()
-    return JsonResponse({'status': 'success', 'completed': task.completed})
+@csrf_exempt
+def toggle_task(request):
+    if request.method == 'POST':
+        task_id = request.POST.get('task_id')
+        task_ins = task.objects.get(id=task_id)
+        task_ins.status = 'completed' if task_ins.status == 'pending' else 'pending'
+        task_ins.save()
+        return JsonResponse({'success': True, 'completed': task_ins.status})
+    return JsonResponse({'success': False}, status=400)
 
 
 def create_label(request):

@@ -1,14 +1,12 @@
 {% load static %}
 {% load bootstrap5 %}
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
-<
+
 {% bootstrap_css %}
 {% bootstrap_javascript %}
 
 
-<div class="modal fade" id="createTaskModal" tabindex="-1" aria-labelledby="createTaskModalLabel" aria-hidden="true">
-  <div class="modal-dialog">
-    <div class="modal-content rounded-4 shadow-sm">
+
       <div class="modal-header bg-primary text-white">      </div>
       
       <form action="{% url 'create_task' %}" method="POST">
@@ -51,8 +49,6 @@
           <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
         </div>
       </form>
-    </div>
-  </div>
-</div>
+  
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>

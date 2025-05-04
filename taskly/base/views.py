@@ -111,6 +111,13 @@ def update_task(request, id):
     return render(request, 'base/update_task.html', {'form': form, 'task': task_ins})
 
 
+def toggle_task(request, task_id):
+    task = task.objects.get(id=task_id)
+    task.completed = not task.completed
+    task.save()
+    return JsonResponse({'status': 'success', 'completed': task.completed})
+
+
 def create_label(request):
     pass
 

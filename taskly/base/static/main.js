@@ -58,3 +58,38 @@ function getCookie(name) {
   }
   return cookieValue;
 }
+
+function showDueDateModal(event) {
+    event.preventDefault(); // Prevent default behavior
+  
+    const button = document.getElementById("calBtn");
+    const modal = document.getElementById("dueDateModal");
+  
+    // Get the button's position and dimensions
+    const rect = button.getBoundingClientRect();
+  
+    // Set the modal's position relative to the button
+    // modal.style.position = "rel";
+    modal.style.top = `${window.scrollY}px`; // Adjust for scrolling
+    modal.style.left = `${rect.left + rect.width + 10}px`; // Place it to the right of the button with a 10px margin
+    modal.style.display = "block"; // Make the modal visible
+  }
+  
+  function hideDueDateModal() {
+    const modal = document.getElementById("dueDateModal");
+    modal.style.display = "none"; // Hide the modal
+  }
+  
+  function setDueDate() {
+    const dueDateInput = document.getElementById("due_date_input").value;
+  
+    if (dueDateInput) {
+      // Set the due date in the form input
+      document.getElementById("due_date").value = dueDateInput;
+  
+      // Hide the modal
+      hideDueDateModal();
+    } else {
+      alert("Please select a due date.");
+    }
+  }

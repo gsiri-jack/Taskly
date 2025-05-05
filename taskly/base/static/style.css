@@ -82,3 +82,16 @@
     color: gray;
   }
   
+.modal{
+    position: absolute !important; 
+}
+
+#dueDateModal {
+  border: 1px solid #ccc;
+  background-color: white;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  padding: 15px;
+  border-radius: 5px;
+  z-index: 1050; /* Ensure it appears above other elements */
+  width: 300px; /* Adjust width as needed */
+}

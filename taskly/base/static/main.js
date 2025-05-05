@@ -59,36 +59,37 @@ function getCookie(name) {
   return cookieValue;
 }
 
-function showDueDateModal(event) {
-    event.preventDefault(); // Prevent default behavior
+function showModal(modalName,event) {
+    event.preventDefault(); 
   
     const button = document.getElementById("calBtn");
-    const modal = document.getElementById("dueDateModal");
+    const modal = document.getElementById(modalName);
   
-    // Get the button's position and dimensions
     const rect = button.getBoundingClientRect();
-  
-    // Set the modal's position relative to the button
-    // modal.style.position = "rel";
-    modal.style.top = `${window.scrollY}px`; // Adjust for scrolling
-    modal.style.left = `${rect.left + rect.width + 10}px`; // Place it to the right of the button with a 10px margin
-    modal.style.display = "block"; // Make the modal visible
+    console.log(rect.top);
+    console.log(window.scrollY);
+    if (modal === "priorityModal"){
+      modal.style.top = `${window.scrollY + rect.top + rect.height }`;
+    }else{
+    modal.style.top = `${window.scrollY - 10}px`;
+
+    }
+    // modal.style.left = `${rect.left}px`;
+    modal.style.display = "block"; 
   }
   
-  function hideDueDateModal() {
-    const modal = document.getElementById("dueDateModal");
-    modal.style.display = "none"; // Hide the modal
+  function hideModal(modalName) {
+    const modal = document.getElementById(modalName);
+    modal.style.display = "none";
   }
   
   function setDueDate() {
     const dueDateInput = document.getElementById("due_date_input").value;
   
     if (dueDateInput) {
-      // Set the due date in the form input
       document.getElementById("due_date").value = dueDateInput;
   
-      // Hide the modal
-      hideDueDateModal();
+      hideModal('dueDateModal');
     } else {
       alert("Please select a due date.");
     }

@@ -30,11 +30,11 @@ href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.c
             </div>
             <div class="m-3">
               <!-- Button to trigger the modal -->
-              <button type="button" id="calBtn" class="btn btn-outline-dark" onclick="showDueDateModal(event)">
+              <button type="button" id="calBtn" class="btn btn-outline-dark" onclick="showModal('dueDateModal',event)">
                 <i class="bi bi-calendar2-plus"></i> Today
               </button>
 
-              <button type="button" class="btn btn-outline-dark">
+              <button type="button" class="btn btn-outline-dark" onclick="showModal('priorityModal',event)">
                 <i class="bi bi-flag-fill"></i> Priority
               </button>
 
@@ -55,10 +55,10 @@ href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.c
       </form>
 
       <!-- Modal for Due Date -->
-      <div id="dueDateModal" class="modal-content" style="display: none; position: absolute; z-index: 1050;">
+      <div id="dueDateModal" class="Modal_style modal-content" style="display: none; position: absolute; z-index: 1050;">
         <div class="modal-header">
           <h5 class="modal-title">Set Due Date</h5>
-          <button type="button" class="btn-close" onclick="hideDueDateModal()"></button>
+          <button type="button" class="btn-close" onclick="hideModal('dueDateModal')"></button>
         </div>
         <div class="modal-body">
           <label for="due_date_input" class="form-label">Enter Due Date</label>
@@ -66,7 +66,26 @@ href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.c
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-primary" onclick="setDueDate()">Set</button>
-          <button type="button" class="btn btn-secondary" onclick="hideDueDateModal()">Cancel</button>
+          <button type="button" class="btn btn-secondary" onclick="hideModal('dueDateModal')">Cancel</button>
+        </div>
+      </div>
+
+
+      <div id="priorityModal" class="Modal_style modal-content" style="display: none; position: absolute; z-index: 1050;">
+        <div class="modal-header">
+          <h5 class="modal-title">Set Due Date</h5>
+          <button type="button" class="btn-close" onclick="hideModal('priorityModal')"></button>
+        </div>
+        <div class="modal-body">
+          <select name="priority" id="priority">
+            <option value="" selected>selet priority</option>
+            <option value="high">High</option>
+            <option value="medium">medium</option>
+          </select>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-primary" onclick="setPriority()">Set</button>
+          <button type="button" class="btn btn-secondary" onclick="hideModal('priorityModal')">Cancel</button>
         </div>
       </div>
 

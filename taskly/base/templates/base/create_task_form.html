@@ -38,11 +38,14 @@ href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.c
                 <i class="bi bi-flag-fill"></i> Priority
               </button>
 
-              <button type="button" class="btn btn-outline-dark">
+              <button type="button" class="btn btn-outline-dark" onclick="showModal('tagModal',event)">
                 <i class="bi bi-tags"></i> Tag
               </button>
             </div>
             <input type="hidden" name="due_date" id="due_date">
+            <input type="hidden" name="task_priority" id="priority">
+            <input type="hidden" name="task_tag" id="tag">
+
           </div>
          
         </div>
@@ -77,8 +80,8 @@ href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.c
           <button type="button" class="btn-close" onclick="hideModal('priorityModal')"></button>
         </div>
         <div class="modal-body">
-          <select name="priority" id="priority">
-            <option value="" selected>selet priority</option>
+          <select name="priority" id="priorityInput">
+            <option value="select" selected>selet priority</option>
             <option value="high">High</option>
             <option value="medium">medium</option>
           </select>
@@ -86,6 +89,25 @@ href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.c
         <div class="modal-footer">
           <button type="button" class="btn btn-primary" onclick="setPriority()">Set</button>
           <button type="button" class="btn btn-secondary" onclick="hideModal('priorityModal')">Cancel</button>
+        </div>
+      </div>
+
+      <div id="tagModal" class="Modal_style modal-content" style="display: none; position: absolute; z-index: 1050;">
+        <div class="modal-header">
+          <h5 class="modal-title">Set Task Tag</h5>
+          <button type="button" class="btn-close" onclick="hideModal('tagModal')"></button>
+        </div>
+        <div class="modal-body">
+          <label for="tagInput" class="form-label">Select Tag</label>
+          <select name="task_tag" id="tagInput" class="form-select">
+            <option value="select" selected>Select tag</option>
+            <option value="important">Important</option>
+            <option value="medium">Medium</option>
+          </select>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-primary" onclick="setTag()">Set</button>
+          <button type="button" class="btn btn-secondary" onclick="hideModal('tagModal')">Cancel</button>
         </div>
       </div>
 

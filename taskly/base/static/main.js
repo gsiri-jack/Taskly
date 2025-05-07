@@ -69,9 +69,8 @@ function showModal(modalName,event) {
     console.log(rect.top);
     console.log(window.scrollY);
     if (modal === "priorityModal"){
-      modal.style.top = `${window.scrollY + rect.top + rect.height }`;
-    }else{
-    modal.style.top = `${window.scrollY - 10}px`;
+      modal.style.top = `${rect.top + rect.height }`;
+   
 
     }
     // modal.style.left = `${rect.left}px`;
@@ -92,5 +91,23 @@ function showModal(modalName,event) {
       hideModal('dueDateModal');
     } else {
       alert("Please select a due date.");
+    }
+  }
+
+  function setPriority() {
+    const priorityValue = document.getElementById('priorityInput').value;
+    console.log(priorityValue);
+    if (priorityValue !== 'select' && priorityValue !== '') {
+      document.getElementById('priority').value = priorityValue;
+      console.log(priorityValue);
+      hideModal('priorityModal');
+    }
+  }
+
+  function setTag() {
+    const tagValue = document.getElementById('tagInput').value;
+    if (tagValue !== 'select'){
+      document.getElementById('tag').value = tagValue;
+      hideModal('tagModal');
     }
   }
